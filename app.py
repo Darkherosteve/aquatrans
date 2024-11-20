@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Home route to render the home page
 @app.route("/")
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 # Form submission route
 @app.route('/submit', methods=['POST'])
