@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, send_file
-# from excelupdate import update_excel
+from excelupdate import update_excel
 # from exceltopdf import excel_to_pdf
 
 app = Flask(__name__)
@@ -72,7 +72,7 @@ def submit():
 
     try:
         # Update Excel and convert to PDF
-        # update_excel(Excel_file, sheet, updates)
+        update_excel(Excel_file, sheet, updates)
         # excel_to_pdf(Excel_file, pdf_save)
         last_converted_file = os.path.join(pdf_save, "converted_file.pdf")
         
@@ -80,7 +80,7 @@ def submit():
         print(f"Error during Excel to PDF conversion: {e}")
         return "An error occurred during file processing!", 500
 
-    return render_template('pdfdownload.html', last_converted_file=last_converted_file)
+    return render_template('download.html', last_converted_file=last_converted_file)
 
 # File download route
 @app.route("/download")
