@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, send_file
 from excelupdate import update_excel
-# from exceltopdf import excel_to_pdf
+from pdfconvert import excel_to_pdf
 
 app = Flask(__name__)
 
@@ -41,8 +41,8 @@ def submit():
     print(f"Received vehicle number: {from_location}")
 
     # Excel file location (do not change)
-    Excel_file = r"C:\Users\steve\Desktop\Aqua trans Web\ExcelSheets\LR.xlsx" 
-    pdf_save = r"C:\Users\steve\Desktop\Aqua trans Web\pdf" 
+    Excel_file = r"C:\Users\steve\Desktop\Aqua trans Web\aquatrans\ExcelSheets\LR.xlsx" 
+    pdf_save = r"C:\Users\steve\Desktop\Aqua trans Web\aquatrans\pdf" 
     sheet = "Sheet1"
 
     # Updates for the Excel file
@@ -73,7 +73,7 @@ def submit():
     try:
         # Update Excel and convert to PDF
         update_excel(Excel_file, sheet, updates)
-        # excel_to_pdf(Excel_file, pdf_save)
+        excel_to_pdf(Excel_file, pdf_save)
         last_converted_file = os.path.join(pdf_save, "converted_file.pdf")
         
     except Exception as e:
