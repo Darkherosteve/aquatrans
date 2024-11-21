@@ -85,22 +85,18 @@ def submit():
 # File download route
 @app.route('/download', methods=['GET'])
 def download_file():
-    file_path = request.args.get('file_path')  # Get the file path from query parameter
-    if not file_path:
-        return jsonify({"error": "File path is required"}), 400
-    
+    file_path = r'C:\Users\steve\Desktop\Aqua trans Web\aquatrans\pdf\pdf files.pdf'  # Replace with the path to your file
     if not os.path.exists(file_path):
-        return jsonify({"error": f"File not found: {file_path}"}), 404
+        return "File not found!", 404
 
     try:
-        # Send the file for download
         return send_file(
-            file_path, 
-            as_attachment=True, 
+            file_path,
+            as_attachment=True,
             download_name=os.path.basename(file_path)
         )
     except Exception as e:
-        return jsonify({"error": f"Failed to download file: {str(e)}"}), 500
+        return f"Failed to download file: {str(e)}", 500
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -51,13 +51,14 @@
 </head>
 <body>
     <div class="button-container">
-        <button id="button1" onclick="handleClick('Downloading Starts')">Download receipt</button>
+      <button onclick="downloadFile()">Download</button>
         <button id="button2" onclick="handleClick('Back for New enters')">Home </button>
     </div>
 
     <script>
-        function handleClick(buttonName) {
-            alert(buttonName);
+        function downloadFile() {
+            // Redirect to the download route
+            window.location.href = "/download";
         }
     </script>
 </body>
