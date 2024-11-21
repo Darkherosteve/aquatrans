@@ -42,7 +42,7 @@ def submit():
 
     # Excel file location (do not change)
     Excel_file = r"C:\Users\steve\Desktop\Aqua trans Web\aquatrans\ExcelSheets\LR.xlsx" 
-    pdf_save = r"C:\Users\steve\Desktop\Aqua trans Web\aquatrans\pdf" 
+    pdf_save = r"C:\Users\steve\Desktop\Aqua trans Web\aquatrans\pdf\pdf files" 
     sheet = "Sheet1"
 
     # Updates for the Excel file
@@ -83,14 +83,24 @@ def submit():
     return render_template('download.html', last_converted_file=last_converted_file)
 
 # File download route
-@app.route("/download")
-def download():
-    global last_converted_file  # Access the global variable
+@app.route('/download', methods=['GET'])
+def download_file():
+    file_path = request.args.get('file_path')  # Get the file path from query parameter
+    if not file_path:
+        return jsonify({"error": "File path is required"}), 400
+    
+    if not os.path.exists(file_path):
+        return jsonify({"error": f"File not found: {file_path}"}), 404
 
-    if last_converted_file and os.path.exists(last_converted_file):
-        return send_file(last_converted_file, as_attachment=True)
-    else:
-        return "File not found or not generated yet!", 404
+    try:
+        # Send the file for download
+        return send_file(
+            file_path, 
+            as_attachment=True, 
+            download_name=os.path.basename(file_path)
+        )
+    except Exception as e:
+        return jsonify({"error": f"Failed to download file: {str(e)}"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
