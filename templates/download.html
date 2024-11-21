@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <!-- Alert Section -->
+    Alert Section
     {% if alert_type and alert_message %}
     <div class="alert-container">
         <div class="alert alert-{{ alert_type }} d-flex align-items-center" role="alert">
@@ -44,7 +44,9 @@
         function downloadFile() {
             // Redirect to the download route
             window.location.href = "/download";
+            alert("File Downloading Started!");
         }
+
     </script>
 
     <!-- SVG Icons for Alerts -->

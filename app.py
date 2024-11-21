@@ -13,6 +13,7 @@ def home():
 # Form submission route
 @app.route('/submit', methods=['POST'])
 def submit():
+    
     # Get Form Data and convert to uppercase
     vehicle_no = request.form.get('vehicle_no').upper()
     date = request.form.get('date')
@@ -28,11 +29,12 @@ def submit():
     net_weight = request.form.get('net_weight').upper()
     invoice_no = request.form.get('invoice_no').upper()
     eway_bill_no = request.form.get('eway_bill_no').upper()
-    # container_no = request.form.get('container_no').upper()
+    container_no = request.form.get('container_no').upper()
     arrival_time = request.form.get('arrival_time').upper()
     departure_time = request.form.get('departure_time').upper()
     remark = request.form.get('remark').upper()
     booking_no = request.form.get('booking_no').upper()
+    seal_no = request.form.get('seal_no').upper()
 
     # Debug print
     print(f"Received vehicle number: {vehicle_no}")
@@ -61,8 +63,8 @@ def submit():
         "F17": net_weight,
         "H17": invoice_no,
         "H18": eway_bill_no,
-        # "B19": container_no, 
-        # "B20": seal_no,
+        "B19": container_no, 
+        "B20": seal_no,
         "B21": arrival_time,
         "B23": departure_time,
         "H19": remark,
