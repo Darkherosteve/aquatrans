@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  aquatrans:
+    image: aquatrans
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5002:5002
